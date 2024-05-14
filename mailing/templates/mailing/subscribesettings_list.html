@@ -14,7 +14,7 @@
     <div class="col-3">
     <div class="card mb-4 box-shadow">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">{{object.message}}</h4>
+        <h4 class="my-0 font-weight-normal">Тема сообщения: {{object.message}}</h4>
       </div>
       <div class="card-body">
         <ul class="list-unstyled mt-3 mb-4">
@@ -22,7 +22,8 @@
           <p class="text-left" style="font-size:13px">Время завершения: {{ object.end_time }}</p>
           <p class="text-left" style="font-size:13px">Периодичность: {{ object.frequency }}</p>
           <p class="text-left" style="font-size:13px">Статус: {{ object.status }}</p>
-          <p class="text-left" style="font-size:13px">Клиент: {{ object.client }}</p>
+          <p class="text-left" style="font-size:13px">Клиент: <br>{% for client in object.client.all %}
+            {{ client.fio }}: {{ client.email }}<br/>{% endfor %}</p>
         </ul>
         <a href="#" type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
       </div>

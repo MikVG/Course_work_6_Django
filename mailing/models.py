@@ -53,11 +53,12 @@ class SubscribeSettings(models.Model):
 
     start_time = models.DateTimeField(verbose_name='время начала рассылки')
     end_time = models.DateTimeField(verbose_name='время окончания рассылки')
+    next_run = models.DateTimeField(verbose_name='дата и время следующей рассылки', blank=True, null=True)
     frequency = models.CharField(max_length=25, verbose_name='периодичность рассылки', choices=FREQUENCY_CHOICES,
                                  default='daily')
     status = models.CharField(max_length=25, verbose_name='статус рассылки', choices=STATUS_CHOICES,
                               default='created')
-    message = models.ForeignKey(Message, on_delete=models.CASCADE, **NULLABLE, verbose_name='сообщение')
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='сообщение')
     client = models.ManyToManyField(Client, verbose_name='клиент', blank=True)
 
 
