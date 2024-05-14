@@ -1,17 +1,8 @@
 {% extends 'mailing/base.html' %}
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <p class="lead">Список рассылок</p>
 </div>
-
-<div class="container">
-  <div class="col-12 mb-5">
-    <a class="btn btn-outline-primary" href="{% url 'mailing:subscribe_create' %}">Добавить рассылку</a>
-  </div>
-  <div class="row text-center">
-    {% for object in object_list %}
-    <div class="col-3">
+  <div class="col-6">
     <div class="card mb-4 box-shadow">
       <div class="card-header">
         <h4 class="my-0 font-weight-normal">Тема сообщения: {{object.message}}</h4>
@@ -25,16 +16,7 @@
           <p class="text-left" style="font-size:13px">Клиент: <br>{% for client in object.client.all %}
             {{ client.fio }}: {{ client.email }}<br/>{% endfor %}</p>
         </ul>
-        <a href="{% url 'mailing:subscribe_detail' object.pk %}"
-           type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
-        <a href="{% url 'mailing:subscribe_edit' object.pk %}"
-           type="button" class="btn btn-block btn-outline-primary">Изменить</a>
-        <a href="{% url 'mailing:subscribe_delete' object.pk %}"
-           type="button" class="btn btn-block btn-outline-primary">Удалить</a>
       </div>
     </div>
-    </div>
-    {% endfor %}
   </div>
-</div>
 {% endblock %}

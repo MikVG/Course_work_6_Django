@@ -20,7 +20,12 @@
         <ul class="list-unstyled mt-3 mb-4">
           <li>{{object.text | truncatechars:50}}</li>
         </ul>
-        <a href="#" type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
+        <a href="{% url 'mailing:message_detail' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
+        <a href="{% url 'mailing:message_edit' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Изменить</a>
+        <a href="{% url 'mailing:message_delete' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Удалить</a>
       </div>
     </div>
     </div>

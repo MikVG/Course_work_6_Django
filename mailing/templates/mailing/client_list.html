@@ -21,7 +21,12 @@
         <ul class="list-unstyled mt-3 mb-4">
           <li>{{object.comment | truncatechars:50}}</li>
         </ul>
-        <a href="#" type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
+        <a href="{% url 'mailing:client_detail' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Подробнее</a>
+        <a href="{% url 'mailing:client_edit' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Изменить</a>
+        <a href="{% url 'mailing:client_delete' object.pk %}"
+           type="button" class="btn btn-block btn-outline-primary">Удалить</a>
       </div>
     </div>
     </div>
