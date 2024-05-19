@@ -22,7 +22,7 @@ class ClientForm(StyleFormMixin, ModelForm):
 class MessageForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = ('title', 'text')
 
 
 class SubscribeForm(StyleFormMixin, ModelForm):
@@ -35,3 +35,9 @@ class SubscribeForm(StyleFormMixin, ModelForm):
             "start_time": DateTimeInput(attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС", "type": "datetime-local"}),
             "end_time": DateTimeInput(attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС", "type": "datetime-local"}),
         }
+
+
+class SubscribeManagerForm(ModelForm):
+    class Meta:
+        model = SubscribeSettings
+        fields = ('is_active',)

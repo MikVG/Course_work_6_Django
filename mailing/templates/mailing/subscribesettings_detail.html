@@ -14,6 +14,7 @@
           <p class="text-left" style="font-size:13px">Периодичность: {{ object.frequency }}</p>
           <p class="text-left" style="font-size:13px">Статус: {{ object.status }}</p>
           <p class="text-left" style="font-size:13px">Клиент: <br>{% for client in object.client.all %}
+          <p class="text-left" style="font-size:13px">Владелец: {{ object.owner }}
             {{ client.fio }}: {{ client.email }}<br/>{% endfor %}</p>
         </ul>
       </div>

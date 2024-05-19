@@ -1,10 +1,11 @@
 import secrets
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, ListView
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserManagerForm
 from users.models import User
 
 from django.conf import settings
@@ -16,9 +17,6 @@ class RegisterView(CreateView):
     form_class = UserRegisterForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
-
-    # def get_success_url(self):
-    #     return reverse('users:login')
 
     def form_valid(self, form):
         token = secrets.token_hex(16)
@@ -38,3 +36,13 @@ def confirm_email(request, token):
     user.is_active = True
     user.save()
     return redirect(reverse('users:login'))
+
+
+class UserManagerView(LoginRequiredMixin, ListView):
+    model = User
+
+
+class UserManagerUpdate(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserManagerForm
+    success_url = reverse_lazy('users:user_list')

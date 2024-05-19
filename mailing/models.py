@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 NULLABLE = {'null': True, 'blank': True}
 
 
@@ -10,6 +12,7 @@ class Client(models.Model):
     email = models.EmailField(max_length=50, verbose_name='контактный email')
     fio = models.CharField(max_length=150, verbose_name='ФИО')
     comment = models.TextField(verbose_name='комментарий', **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='владелец', null=True, blank=True)
 
     def __str__(self):
         return f'{self.email} {self.fio}'
@@ -25,6 +28,7 @@ class Message(models.Model):
     """
     title = models.CharField(max_length=100, verbose_name='тема рассылки')
     text = models.TextField(verbose_name='текст рассылки')
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='владелец', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -60,6 +64,19 @@ class SubscribeSettings(models.Model):
                               default='created')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='сообщение')
     client = models.ManyToManyField(Client, verbose_name='клиент', blank=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='владелец', null=True, blank=True)
+    is_active = models.BooleanField(default=True, verbose_name='активность рассылки')
+
+    class Meta:
+        verbose_name = 'рассылка'
+        verbose_name_plural = 'рассылки'
+
+        permissions = [
+            ('can_subscribe_off', 'Can subscribe off')
+        ]
+
+    def __str__(self):
+        return f'{self.start_time} {self.end_time} {self.status}'
 
 
 class Logs(models.Model):
