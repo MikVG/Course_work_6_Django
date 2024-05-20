@@ -26,14 +26,6 @@
         <img src="{{ object.image | media_filter }}" alt={{ object }} class="img-fluid">
         <a href="{% url 'blog:blog-detail' object.pk %}"
            type="button" class="btn btn-block btn-outline-primary">Читать далее</a>
-<!--        {% if user == object.owner %}-->
-<!--        <a href="{% url 'mailing:client_edit' object.pk %}"-->
-<!--           type="button" class="btn btn-block btn-outline-primary">Изменить</a>-->
-<!--        {% endif %}-->
-<!--        {% if user == object.owner %}-->
-<!--        <a href="{% url 'mailing:client_delete' object.pk %}"-->
-<!--           type="button" class="btn btn-block btn-outline-primary">Удалить</a>-->
-<!--        {% endif %}-->
       </div>
     </div>
     </div>

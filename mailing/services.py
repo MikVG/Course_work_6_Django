@@ -22,7 +22,7 @@ def send_mailing():
             mailing.status = 'completed'
             mailing.save()
 
-    mailings = (SubscribeSettings.objects.filter(start_time__lte=current_datetime).
+    mailings = (SubscribeSettings.objects.filter(is_active=True).filter(start_time__lte=current_datetime).
                 filter(end_time__gte=current_datetime).filter(status__in=['created', 'started']))
 
     for mailing in mailings:

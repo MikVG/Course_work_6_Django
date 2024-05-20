@@ -1,10 +1,19 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from blog.services import main_page
 from mailing.forms import ClientForm, SubscribeForm, MessageForm, SubscribeManagerForm
 from mailing.models import Message, Client, SubscribeSettings
+
+
+@login_required
+def main(request):
+    context = main_page()
+    return render(request, 'mailing/main.html', context)
 
 
 class SubscribeListView(ListView):
@@ -14,7 +23,7 @@ class SubscribeListView(ListView):
 class SubscribeCreateView(LoginRequiredMixin, CreateView):
     model = SubscribeSettings
     form_class = SubscribeForm
-    success_url = reverse_lazy('mailing:home')
+    success_url = reverse_lazy('mailing:subscribe_list')
 
     def form_valid(self, form):
         subscribe = form.save()
@@ -31,7 +40,7 @@ class SubscribeDetailView(LoginRequiredMixin, DetailView):
 class SubscribeUpdateView(LoginRequiredMixin, UpdateView):
     model = SubscribeSettings
     form_class = SubscribeForm
-    success_url = reverse_lazy('mailing:home')
+    success_url = reverse_lazy('mailing:subscribe_list')
 
     def get_form_class(self):
         user = self.request.user
@@ -44,7 +53,7 @@ class SubscribeUpdateView(LoginRequiredMixin, UpdateView):
 
 class SubscribeDeleteView(LoginRequiredMixin, DeleteView):
     model = SubscribeSettings
-    success_url = reverse_lazy('mailing:home')
+    success_url = reverse_lazy('mailing:subscribe_list')
 
 
 class ClientListView(ListView):
