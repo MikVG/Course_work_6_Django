@@ -3,10 +3,14 @@ from django.views.generic import ListView, CreateView, DetailView
 
 from blog.forms import BlogForm
 from blog.models import Blog
+from blog.services import get_blog_from_cache
 
 
 class BlogListView(ListView):
     model = Blog
+
+    def get_queryset(self):
+        return get_blog_from_cache()
 
 
 class BlogCreateView(CreateView):

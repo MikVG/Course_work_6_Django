@@ -1,8 +1,11 @@
 from random import sample
 
+from django.core.cache import cache
+
 from blog.models import Blog
 from mailing.models import SubscribeSettings, Client
 
+from config.settings import CACHE_ENABLED
 
 def main_page():
     mailing_count = SubscribeSettings.objects.all().count
@@ -21,3 +24,15 @@ def main_page():
         'queryset': queryset,
     }
     return context
+
+
+def get_blog_from_cache():
+    if not CACHE_ENABLED:
+        return Blog.objects.all()
+    key = "blog_list"
+    blogs = cache.get(key)
+    if blogs is not None:
+        return blogs
+    blogs = Blog.objects.all()
+    cache.set(key, blogs)
+    return blogs
