@@ -1,0 +1,25 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <p class="lead">Блог</p>
+</div>
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{object.email}}</h5>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>{{object.text}}</li>
+        </ul>
+        <img src="{{ object.image | media_filter }}" alt={{ object }} class="img-fluid">
+      </div>
+      <div class="card-footer">
+        Дата публикации: {{ object.published_date }}<br />
+        Просмотры: {{ object.count_views }}
+      </div>
+    </div>
+</div>
+{% endblock %}

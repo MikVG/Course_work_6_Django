@@ -2,7 +2,7 @@
     <a class="p-2 text-dark" href="{% url 'mailing:home' %}">Список рассылок</a>
     <a class="p-2 text-dark" href="{% url 'mailing:client_list' %}">Список клиентов</a>
     <a class="p-2 text-dark" href="{% url 'mailing:message_list' %}">Список сообщений</a>
-    <a class="p-2 text-dark" href="#">Блог</a>
+    <a class="p-2 text-dark" href="{% url 'blog:blog-list' %}">Блог</a>
     {% if perms.users.can_block_user %}
     <a class="p-2 text-dark" href="{% url 'users:user_list' %}">Список пользователей</a>
     {% endif %}
