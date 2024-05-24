@@ -21,6 +21,9 @@ def send_mailing():
         if mailing.end_time < current_datetime:
             mailing.status = 'completed'
             mailing.save()
+        if mailing.status == 'created' and mailing.next_run is not None:
+            mailing.status = 'started'
+            mailing.save()
 
     mailings = (SubscribeSettings.objects.filter(is_active=True).filter(start_time__lte=current_datetime).
                 filter(end_time__gte=current_datetime).filter(status__in=['created', 'started']))
