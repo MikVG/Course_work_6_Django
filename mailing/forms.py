@@ -29,7 +29,7 @@ class SubscribeForm(StyleFormMixin, ModelForm):
     class Meta:
         model = SubscribeSettings
         # fields = '__all__'
-        fields = ('start_time', 'end_time', 'frequency', 'status', 'message', 'client')
+        fields = ('start_time', 'end_time', 'frequency', 'message', 'client')
 
         widgets = {
             "start_time": DateTimeInput(attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС", "type": "datetime-local"}),

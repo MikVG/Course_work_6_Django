@@ -10,7 +10,6 @@ from mailing.forms import ClientForm, SubscribeForm, MessageForm, SubscribeManag
 from mailing.models import Message, Client, SubscribeSettings
 
 
-@login_required
 def main(request):
     context = main_page()
     return render(request, 'mailing/main.html', context)

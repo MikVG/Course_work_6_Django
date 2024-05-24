@@ -25,9 +25,9 @@ def send_mailing():
     mailings = (SubscribeSettings.objects.filter(is_active=True).filter(start_time__lte=current_datetime).
                 filter(end_time__gte=current_datetime).filter(status__in=['created', 'started']))
 
-    for mailing in mailings:
+    mailing_list = []
 
-        mailing_list = []
+    for mailing in mailings:
 
         if mailing.next_run is None:
             mailing_list.append(mailing)
